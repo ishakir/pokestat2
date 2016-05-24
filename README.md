@@ -9,3 +9,4 @@ This is a revamp of the [original Pokestat project](https://github.com/ishakir/P
 - A deeper history
 - Automated upload of new data
 - A larger selection of generations and tiers
+- More extensible (backend covers "raw" and "real" stats, as well as data cut at particular ladder rankings)
