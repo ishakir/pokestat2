@@ -1,9 +1,11 @@
-Ok, so for now we'll go with two tables, simply:
+# Pokestat 2
 
-SOURCE_ID,YEAR,MONTH,GENERATION,TIER,MIN_RANK,FILENAME (implicit created_at and updated_at)
+A web app which displays visualizations of the usage statistics churned out by the Pokemon simulator [Pokemon Showdown](http://pokemonshowdown.com/), and hosted on [smogon](http://www.smogon.com/stats/). The site itself is hosted at [pokestat.org.uk](http://pokestat.org.uk). A very simple rails app which caches the usage stats in a SQL backend, serves them over a HTTP API to the front end which renders using ChartJS.
 
-POKEMON,USAGE,SOURCE_ID
+I'd like to thank Antar of the Smogon Forums for collating the stats, and the Pokemon Showdown team for provding a simulator that drives the community to this day.
 
-Will write a simple loader (as a rails adhoc script) that just dumps the contents of the usage.txt files on the smogon server into this table, and then can copy the front end code from the old PokeStat to render the graphs. Need a simple ruby backend to serve the data no problem. Bing Bang Boom. Should have over one years worth of data for people to dig into.
+This is a revamp of the [original Pokestat project](https://github.com/ishakir/PokeStat), which was originally too limited in it's scope and eventually died due to over-ambition, and lack of experience on my part. Over the original, Pokestat 2 offers:
 
-Will buy back the domain name tonight, and then we're definitely laughing in a couple days time. Would be nice to get the whole thing running locally tonight.
+- A deeper history
+- Automated upload of new data
+- A larger selection of generations and tiers
