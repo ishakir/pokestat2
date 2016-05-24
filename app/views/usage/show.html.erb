@@ -1,0 +1,91 @@
+<%= javascript_include_tag "usage" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 column">
+      <div class="page-header">
+        <h1 align="center">
+          PokeStat usage statistics
+          <small id="tierSmall" style="display: block;">2014 statistics for the OU tier</small>
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="errorMessageRow" style="display: none;">
+    <div class="col-md-12 column">
+      <div class="alert fade in alert-danger" id="swap-error">
+        <div class="row">
+          <div class="col-md-11 column">
+            <span id="errorMessage">There has been an error!</span>
+          </div>
+          <div class="col-md-1 column">
+            <button type="button" class="glyphicon glyphicon-remove" onclick="hideErrorMessage()"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 column" id="pickerColumn">
+      <div id="pokemonPicker" style="text-align: center;">
+        <input id="pickerInput" class="typeahead" type="text" placeholder="Add a pokemon...">
+      </div>
+    </div>
+    <div class="col-md-1 column">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="generationDropdown" data-toggle="dropdown" aria-expanded="true">
+          Gen 1
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="generationul"></ul>
+      </div>
+    </div>
+    <div class="col-md-1 column">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="tierDropDown" data-toggle="dropdown" aria-expanded="true">
+          OU
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="tierul">
+          <li role="presentation"><a role="menuitem" tabindex="-1" id="OU" onclick="changeTier(this.id)">OU</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" id="UU" onclick="changeTier(this.id)">UU</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" id="LC" onclick="changeTier(this.id)">LC</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" id="VGC2014" onclick="changeTier(this.id)">VGC 2014</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" id="Doubles" onclick="changeTier(this.id)">Doubles</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="usageRow" style="margin-top: 200px;">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column" align="center">
+      <p style="font-size: 1.6em;">
+        To start analysing, try typing a Pokemon's name into the box above!
+      </p>
+      <p id="tierSelected" style="font-size: 1.15em;">
+        You currently have the OU tier selected, to change tier, click on the dropdown on the right.
+      </p>
+    </div>
+    <div class="col-md-2 column"></div>
+  </div>
+  <div class="row" id="chartRow">
+    <div class="row">
+      <div class="col-md-1 column">
+        <p style="margin-top: 200px;"><b>Percentage of Teams</b></p>
+      </div>
+      <div class="col-md-9 column">
+        <canvas id="usageChart" width="800" height="500"></canvas>
+      </div>
+      <div class="col-md-2 column">
+        <div style="margin-top: 200px;" id="usageLegend"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 column"></div>
+      <div class="col-md-2 column" style="margin-top: 30px;">
+        <p><b>Month</b></p>
+      </div>
+      <div class="col-md-5 column"></div>
+    </div>
+  </div>
+</div>
