@@ -26,6 +26,7 @@ var preferredTiers = ["ou", "ubers", "uu", "ru", "nu", "pu", "lc", "doublesou"];
  */
 var generation;
 var tier;
+var elo;
 
 var metadata;
 
@@ -61,15 +62,22 @@ var changeGeneration = function(gen) {
   generation = gen;
 
   // If current_tier doesn't apply to this generation choose a more appropriate one
-  var best_tier = metadata[gen][tier] != undefined ? tier : "ou";
+  var best_tier = metadata[generation][tier] != undefined ? tier : "ou";
   changeTier(best_tier);
 }
 
 var changeTier = function(tr) {
   tier = tr;
 
-  // Replace the pokemon data
-  $.getJSON("/api/v1/pokemon?generation="+generation+"&tier="+tier+"&min_rank=0", function(data) {
+  var best_elo = metadata[generation][tier][elo] != undefined ? elo : 0;
+  changeElo(best_elo);
+};
+
+var changeElo = function(el) {
+  elo = el;
+
+    // Replace the pokemon data
+  $.getJSON("/api/v1/pokemon?generation="+generation+"&tier="+tier+"&min_rank="+elo, function(data) {
     searchablePokemon = data;
   });
 
@@ -103,7 +111,7 @@ var changeTier = function(tr) {
 
   refreshPage();
 
-};
+}
 
 var refreshPage = function() {
   var pokemonToPlot = Object.keys(pokemonColours);
@@ -125,7 +133,7 @@ var refreshPage = function() {
 
 var redrawChart = function() {
   var graphData;
-  $.getJSON("/api/v1/usage?generation="+generation+"&tier="+tier+"&min_rank=0&pokemon="+Object.keys(pokemonColours).join(), function(data) {
+  $.getJSON("/api/v1/usage?generation="+generation+"&tier="+tier+"&min_rank="+elo+"&pokemon="+Object.keys(pokemonColours).join(), function(data) {
     graphData = data;
   });
 
@@ -172,20 +180,18 @@ var removePokemon = function(name) {
 };
 
 var displayUsageInfo = function() {
-  console.log(generation);
-  console.log(tier);
   $('#tierSmall').html("Usage statistics for Gen "+generation+" "+tier);
   $('#tierSelected').html("You currently have the "+tier+" tier selected, to change tier, click on the dropdown on the right.")
   
   // Setup the generation dropdown
-  $('#generationDropdown').html("Gen "+generation+'\n<span class="caret"></span>');
+  $('#generationDropdown').html(generation+'\n<span class="caret"></span>');
 
   var genul = $('#generationul');
   genul.empty();
   var gens = Object.keys(metadata);
   gens.sort();
   gens.forEach(function(gen) {
-    genul.append('<li role="presentation"><a role="menuitem" tabindex="-1" id="'+gen+'" onclick="changeGeneration(this.id)">Gen '+gen+'</a></li>')
+    genul.append('<li role="presentation"><a role="menuitem" tabindex="-1" id="'+gen+'" onclick="changeGeneration(this.id)">'+gen+'</a></li>')
   });
 
   // Setup the tier dropdown
@@ -210,6 +216,17 @@ var displayUsageInfo = function() {
       tierul.append('<li role="presentation"><a role="menuitem" tabindex="-1" id="'+tier+'" onclick="changeTier(this.id)">'+tier+'</a></li>');
     }); 
   }
+
+  // Setup the elo dropdown
+  $('#eloDropDown').html(elo+'\n<span class="caret"></span>');
+
+  var eloul = $('#eloul');
+  eloul.empty();
+  var elos = metadata[generation][tier];
+  elos.sort();
+  elos.forEach(function(el) {
+    eloul.append('<li role="presentation"><a role="menuitem" tabindex="-1" id="'+el+'" onclick="changeElo(this.id)">'+el+'</a></li>')
+  });
 
   $('#usageRow').show();
 };

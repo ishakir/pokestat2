@@ -31,28 +31,41 @@
         <input id="pickerInput" class="typeahead" type="text" placeholder="Add a pokemon...">
       </div>
     </div>
-    <div class="col-md-1 column">
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="generationDropdown" data-toggle="dropdown" aria-expanded="true">
-          Gen 1
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="generationul"></ul>
+    <div class="col-md-2 column">
+      <div class="row">
+        <div class="col-md-2 column">
+          <h5>Generation:</h5>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="generationDropdown" data-toggle="dropdown" aria-expanded="true">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="generationul"></ul>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col-md-1 column">
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="tierDropDown" data-toggle="dropdown" aria-expanded="true">
-          OU
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="tierul">
-          <li role="presentation"><a role="menuitem" tabindex="-1" id="OU" onclick="changeTier(this.id)">OU</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" id="UU" onclick="changeTier(this.id)">UU</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" id="LC" onclick="changeTier(this.id)">LC</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" id="VGC2014" onclick="changeTier(this.id)">VGC 2014</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" id="Doubles" onclick="changeTier(this.id)">Doubles</a></li>
-        </ul>
+      <div class="row">
+        <div class="col-md-2 column">
+          <h5>Tier:</h5>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="tierDropDown" data-toggle="dropdown" aria-expanded="true">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="tierul">
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 column">
+          <h5>Minimum ELO:</h5>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="eloDropDown" data-toggle="dropdown" aria-expanded="true">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="eloul">
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
