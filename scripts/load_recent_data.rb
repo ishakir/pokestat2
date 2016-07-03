@@ -10,10 +10,13 @@ def grab_all_files
 	page.css('a').select {|link| link.text != "../"}.each do |link|
 		files_for_year_month = Set.new
 		page2 = Nokogiri::HTML(open("#{SMOGON_BASE_URL}/#{link.text}"))
-		page2.css('a').select {|link| link.text.end_with?(".txt")}.each do |link2|
-			files_for_year_month.add("#{link2.text}")
+		all_links = page2.css('a').select {|link| link.text.end_with?(".txt")}
+		if all_links.size > 20
+			all_links.each do |link2|
+				files_for_year_month.add("#{link2.text}")
+			end
+			files[link.text] = files_for_year_month.sort
 		end
-		files[link.text] = files_for_year_month.sort
 	end
 
 	Hash[files.sort]
